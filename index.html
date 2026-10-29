@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoVault — Showroom Mobil Premium</title>
+  <meta name="description" content="Temukan koleksi mobil premium pilihan terbaik di AutoVault Showroom. Filter, cari, dan eksplorasi kendaraan impian Anda." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">⬡</span>
+        <span>Auto<strong>Vault</strong></span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <span class="icon-sun">☀</span>
+          <span class="icon-moon">☽</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Koleksi Eksklusif 2024</p>
+      <h1 class="hero-title reveal">
+        Temukan Mobil<br /><span class="gradient-text">Impian Anda</span>
+      </h1>
+      <p class="hero-desc reveal">Jelajahi koleksi kendaraan premium pilihan kami — dari mobil listrik futuristik hingga SUV tangguh berkelas.</p>
+      <a href="#showroom" class="btn-primary reveal">Lihat Koleksi</a>
+    </div>
+    <div class="hero-scroll-hint">
+      <span></span>Scroll
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats-section reveal">
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <span class="stat-number" id="statTotal">—</span>
+        <span class="stat-label">Total Kendaraan</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="statAvailable">—</span>
+        <span class="stat-label">Tersedia</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="statBrands">—</span>
+        <span class="stat-label">Brand</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="statElectric">—</span>
+        <span class="stat-label">Kendaraan Listrik</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SHOWROOM ===== -->
+  <section class="showroom-section" id="showroom">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Inventaris</p>
+      <h2 class="section-title">Koleksi Showroom</h2>
+    </div>
+
+    <!-- FILTER & SEARCH BAR -->
+    <div class="filter-bar reveal">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Cari nama atau brand mobil..."
+          autocomplete="off"
+        />
+        <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
+      </div>
+      <div class="filters-row">
+        <select id="filterBrand" class="filter-select">
+          <option value="">Semua Brand</option>
+        </select>
+        <select id="filterTransmisi" class="filter-select">
+          <option value="">Semua Transmisi</option>
+          <option value="Matic">Matic</option>
+          <option value="Manual">Manual</option>
+          <option value="CVT">CVT</option>
+        </select>
+        <select id="filterBahanBakar" class="filter-select">
+          <option value="">Semua Bahan Bakar</option>
+          <option value="Bensin">Bensin</option>
+          <option value="Diesel">Diesel</option>
+          <option value="Listrik">Listrik</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+        <select id="filterStatus" class="filter-select">
+          <option value="">Semua Status</option>
+          <option value="tersedia">Tersedia</option>
+          <option value="sold">Sold</option>
+        </select>
+        <select id="filterSort" class="filter-select">
+          <option value="">Urutkan</option>
+          <option value="harga-asc">Harga: Terendah</option>
+          <option value="harga-desc">Harga: Tertinggi</option>
+          <option value="tahun-desc">Tahun: Terbaru</option>
+          <option value="tahun-asc">Tahun: Terlama</option>
+          <option value="nama-asc">Nama: A–Z</option>
+        </select>
+        <button class="btn-reset" id="resetFilters">Reset</button>
+      </div>
+    </div>
+
+    <!-- RESULT INFO -->
+    <p class="result-info" id="resultInfo"></p>
+
+    <!-- LOADING SKELETON -->
+    <div class="car-grid" id="skeletonGrid">
+      <div class="skeleton-card" aria-hidden="true"></div>
+      <div class="skeleton-card" aria-hidden="true"></div>
+      <div class="skeleton-card" aria-hidden="true"></div>
+      <div class="skeleton-card" aria-hidden="true"></div>
+      <div class="skeleton-card" aria-hidden="true"></div>
+      <div class="skeleton-card" aria-hidden="true"></div>
+    </div>
+
+    <!-- CAR GRID -->
+    <div class="car-grid hidden" id="carGrid"></div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state hidden" id="emptyState">
+      <div class="empty-icon">🚗</div>
+      <h3>Tidak ada kendaraan ditemukan</h3>
+      <p>Coba ubah filter atau kata kunci pencarian Anda.</p>
+    </div>
+
+    <!-- ERROR STATE -->
+    <div class="error-state hidden" id="errorState">
+      <div class="error-icon">⚠</div>
+      <h3>Gagal memuat data</h3>
+      <p>Terjadi kesalahan saat mengambil data. Silakan coba lagi.</p>
+      <button class="btn-primary" id="retryBtn">Coba Lagi</button>
+    </div>
+  </section>
+
+  <!-- ===== MODAL DETAIL ===== -->
+  <div class="modal-overlay hidden" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
+      <div class="modal-img-wrapper">
+        <img src="" alt="" id="modalImg" class="modal-img" />
+        <div class="modal-status-badge" id="modalStatus"></div>
+      </div>
+      <div class="modal-body">
+        <p class="modal-brand" id="modalBrand"></p>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-price" id="modalPrice"></p>
+        <div class="modal-specs" id="modalSpecs"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>© 2024 <strong>AutoVault</strong> Showroom — Data via <a href="https://api-web.dnccudinus.org/api/mobil" target="_blank" rel="noopener">dnccudinus.org</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
